@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style>
+		h1{
+			color: dimgray;
+		}
+		.panel{
+			margin-right: 35%;
+			margin-left: 35%;
+			text-align: center;
+			background-color: moccasin;
+			border-style: dotted;
+		}
+
+		.button{
+			font-size: 20pt;
+			border-color: tomato;
+			color: white;
+			font-family: fantasy;
+			background-color: coral;
+		}
+		.button:hover{
+			background-color: darkorange;
+			border-color: orange;
+		}
+
+		.table{
+			margin-top: 5pt;
+			margin-left: 5pt;
+			margin-bottom: 5pt;
+			margin-right: 5pt;
+			font-family: monospace;
+			font-size: 15pt;
+			border-style: dashed;
+			border-color: orange;
+			border-width: 2PX;
+		}
+
+		.table tr:nth-child(even){
+			background-color: linen;
+		}
+		.table tr:nth-child(odd){
+			background-color: lightgoldenrodyellow;
+		}
+	</style>
+</head>
+<body>
+	<div id="block" class="panel">
+		<h1>Guessing Game</h1>
+		<form>
+			<label>Your Guess (1 ~ 100)</label>
+			<input type="number" id="number" name="guess">
+		</form>
+		<p><input type="button" id="button" value="Play" name="play" onclick="play()" class="button"></p>
+		<table id="table" class="table" border="1" cellpadding="10" >
+			<tr>
+				<th>Result</th>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+		var random = Math.floor(1 + Math.random()*100);
+		var min = 1;
+		var max = 100;
+
+		function play(){
+			input = document.getElementById("number").value;
+
+			if(input == random){
+				alert("BOMB!!!! :)")
+				location.reload();
+			}
+
+			while(input != random){
+				if(input > random){
+					if(input < max){
+						max = input;
+					}
+					var tr = document.createElement("tr");
+					var td = document.createElement("td");
+					var text = document.createTextNode(min + "~" + max);
+					td.appendChild(text);
+					tr.appendChild(td);
+					document.getElementById("table").appendChild(tr);
+					break;
+				}else if(input < random){
+					if(input > min){
+						min = input;
+					}
+					var tr = document.createElement("tr");
+					var td = document.createElement("td");
+					var text = document.createTextNode(min + "~" + max);
+					td.appendChild(text);
+					tr.appendChild(td);
+					document.getElementById("table").appendChild(tr);
+					break;
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>
